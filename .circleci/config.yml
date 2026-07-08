@@ -21,9 +21,9 @@ jobs:
       - run:
         name: Publikacja obrazu w Docker Hub
         command: |
-        export USERNAME=${USERNAME}
-        export DOCKER_PASSWORD=${DOCKER_PASSWORD}
-        make docker_push
+          export USERNAME=${USERNAME}
+          export DOCKER_PASSWORD=${DOCKER_PASSWORD}
+          make docker_push
 workflows:
   basic:
     jobs:
