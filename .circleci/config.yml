@@ -1,0 +1,30 @@
+version: 2.1
+jobs:
+  build-and-test:
+    machine:
+      image: ubuntu-2004:current
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+        name: Instalacja zaleznosci
+        command: make deps
+      - run:
+        name: Uruchomienie lintera
+        command: make lint
+      - run:
+        name: Uruchomienie testów jednostkowych
+        command: make test
+      - run:
+        name: Budowanie obrazu Docker
+        command: make docker_build
+      - run:
+        name: Publikacja obrazu w Docker Hub
+        command: |
+        export USERNAME=${USERNAME}
+        export DOCKER_PASSWORD=${DOCKER_PASSWORD}
+        make docker_push
+workflows:
+  basic:
+    jobs:
+      - build-and-test
