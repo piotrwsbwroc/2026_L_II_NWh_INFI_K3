@@ -1,4 +1,5 @@
 version: 2.1
+
 jobs:
   build-and-test:
     machine:
@@ -7,23 +8,24 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Instalacja zaleznosci
-        command: make deps
+          name: Instalacja zaleznosci
+          command: make deps
       - run:
-        name: Uruchomienie lintera
-        command: make lint
+          name: Uruchomienie lintera
+          command: make lint
       - run:
-        name: Uruchomienie testów jednostkowych
-        command: make test
+          name: Uruchomienie testów jednostkowych
+          command: make test
       - run:
-        name: Budowanie obrazu Docker
-        command: make docker_build
+          name: Budowanie obrazu Docker
+          command: make docker_build
       - run:
-        name: Publikacja obrazu w Docker Hub
-        command: |
-          export USERNAME=${USERNAME}
-          export DOCKER_PASSWORD=${DOCKER_PASSWORD}
-          make docker_push
+          name: Publikacja obrazu w Docker Hub
+          command: |
+            export USERNAME=${USERNAME}
+            export DOCKER_PASSWORD=${DOCKER_PASSWORD}
+            make docker_push
+
 workflows:
   basic:
     jobs:
